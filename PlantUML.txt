@@ -1,0 +1,93 @@
+@startuml
+skinparam classAttributeIconSize 0
+package jcolonia.daw2021.mayo {
+class ControlSumatorio{
+- {static} OPCIONES_MENÚ_PRINCIPAL : String[] 
+- {static} TÍTULO_MENÚ_PRINCIPAL : String
+- sc: Scanner
+- ListaNúmeros : conjunto
+- VistaMenúBásico : menúPrincipal
++ ControlSumatorio(in: Scanner)
+- buclePrincipal() : void
+- cargarSumando() : void
+- mostrarSumandos() : void
+- mostrarSuma() : void
+- restablecer() : void
+- ejecutarGenérico(id : int) : void
++ {static} main(args: String[] ): void
+}
+
+
+
+class ListaNúmeros {
++ {static} PRECISIÓN : int
+- {static} MÁX : double
+- {static} FORMATO : NumberFormat
+- lista: ArrayList<Double>
++ ListaNúmeros()
++ add(valor : double) : void
++ add(entrada : String) : void
++ {static} transformarEntradaTextoentrada: String): double
+- {static} comprobarRangoPermitido(valor: Double): void
++ getNúmSumandos() : int
++ getSuma() : double
++ toListaString() : ArrayList<String>
++ toString() : String
++ {static} main(args: String[] ): void
+}
+
+class Vista {
+- {static} FORMATO_AVISO : String
+- título : String
+- scEntrada : Scanner
++ Vista(título : String, scEntrada : Scanner)
++ getTítulo() : String
++ getEntrada() : Scanner
++ mostrarTítulo1() : void
++ mostrarTítulo2() : void
++ mostrarTexto() : void
++ mostrarAviso() : void
++ {static} hacerRelleno(tamaño : int, símbolo : char) : String
++ {static} capitalizar(texto : String) : String
++ {static} mostrarError(texto : String) : void
++ {static} esperar(milisegundos : int) : void
++ pedirConfirmación(texto : String) : boolean
++ pedirContinuar() : void
+}
+
+class VistaMenúBásico {
+- sc: Scanner
+- arrayOpcionesMenu : String[]
+- tituloMenu : String
+- opciónElegida : int
++ VistaMenúBásico (titulo : String, sc: Scanner, textoOpciones : String [])
++ mostrarTítulo1() : void
++ mostrarTítulo2() : void
++ mostrarTexto(texto : String) : void
++ mostrarOpciones() : void
++ pedirOpción() : int
++ pedirContinuar() : void
+}
+
+class VistaAltasBásico {
+- sc: Scanner
++ VistaAltasBásico (sc: Scanner)
++ pedirNuevoValor(conjunto : ListaNúmeros) : void
+}
+
+class VistaListadoBásico {
+- sc: Scanner
++ VistaListadoBásico (sc: Scanner)
++ listaSumados(conjunto : ListaNúmeros) : void
++ listaSuma(conjunto : ListaNúmeros) : void
+}
+
+ControlSumatorio <.. VistaMenúBásico
+ControlSumatorio <.. VistaListadoBásico 
+ControlSumatorio <.. VistaAltasBásico
+ControlSumatorio <.. Vista 
+
+ControlSumatorio o-- ListaNúmeros
+
+}
+@enduml
